@@ -1,0 +1,45 @@
+<input id="personNo" placeholder="personNo"><br />
+	<input id="encounter1SPec" placeholder="specieIncotro1"><input id="encounter1Lvl" type="number" placeholder="lvlIncotro1"><br />
+	<input id="encounter2SPec" placeholder="specieIncotro2"><input id="encounter2Lvl" type="number" placeholder="lvlIncotro2"><br />
+	<input id="encounter3SPec" placeholder="specieIncotro3"><input id="encounter3Lvl" type="number" placeholder="lvlIncotro3"><br />
+	<input id="encounter4SPec" placeholder="specieIncotro4"><input id="encounter4Lvl" type="number" placeholder="lvlIncotro4"><br />
+	
+	<button type="button" onclick="output()">Output</button><br /><br /><br />
+	
+	<textarea readonly="readonly" id="out"></textarea>
+	
+	<script>
+		function s(id){
+			return document.getElementById(id);
+		}
+		
+		function sVal(id){
+			return s(id).value;
+		}
+		
+		function hWordToHex(i){
+			if(i == null || i === ""){
+				i= "FFFF";
+			}
+			buf = i.padStart(4, "0");
+			return buf.slice(2)+" "+buf.slice(0,2);
+		}
+		
+		function lvlToHex(i){
+			if(i == null || i === ""){
+				i= "FF";
+			}
+			return i.padStart(2, "0") + " FF";
+		}
+	
+		function output(){
+			personNo = s("personNo").value;
+			
+			s("out").innerHTML = hWordToHex(sVal("personNo")) + " " +
+			hWordToHex(sVal("encounter1SPec")) + " " + lvlToHex(sVal("encounter1Lvl")) + " " +
+			hWordToHex(sVal("encounter2SPec")) + " " + lvlToHex(sVal("encounter2Lvl")) + " " +
+			hWordToHex(sVal("encounter3SPec")) + " " + lvlToHex(sVal("encounter3Lvl")) + " " +
+			hWordToHex(sVal("encounter4SPec")) + " " + lvlToHex(sVal("encounter4Lvl"));
+			
+		}
+	</script>
