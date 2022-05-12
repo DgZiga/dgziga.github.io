@@ -33,8 +33,14 @@
                 max-width: 100vw;
             }
             #render{
+                height: 85vh;
                 margin: 0 auto;
+                margin-bottom: 15vh;
                 position: relative;
+            }
+            #renderCanvas{
+                width: 100%;
+                height: 100%;
             }
             #topDownCanvas{
                 position: absolute;
@@ -115,7 +121,7 @@
             <div id="centrCtrl" class="mobileMoveCtrl"></div>
             <div id="rightCtrl" class="mobileMoveCtrl"></div>
             <canvas width="200" height="200" id="topDownCanvas"></canvas>
-            <canvas class="threeHalves" width="1080" height="720" id="renderCanvas"></canvas>
+            <canvas width="1080" height="720" id="renderCanvas"></canvas>
         </div>
         <div id="mainMenu" class="fullScreen">
             <h1 id="title">Baby Rider</h1>
