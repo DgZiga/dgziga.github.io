@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <style>
 
             /* The animation code */
@@ -72,10 +73,47 @@
                 background-color: red;
                 display: none;
             }
+            .mobileMoveCtrl{
+                width: 10vw;
+                box-sizing: border-box;
+                aspect-ratio: 2 / 1;
+                position: absolute;
+                bottom: 1vh;
+                background-color: white;
+                border: 3px solid #808080;
+                opacity: 0.3;
+            }
+            #leftCtrl{
+                left: 2vw;
+                border-top-left-radius: 25%;
+                border-bottom-left-radius: 25%;
+            }
+            #centrCtrl{
+                left: 12vw;
+            }
+            #rightCtrl{
+                left: 22vw;
+                border-top-right-radius: 25%;
+                border-bottom-right-radius: 25%;
+            }
+            #ctrlRange{
+                position: absolute;
+                bottom: 1vh;
+                left: 2vw;
+                width: 30vw;
+                opacity: 0;
+                z-index: 999;
+                aspect-ratio: 6 / 1;
+                
+            }
         </style>
     </head>
     <body>
         <div id="render" class="threeHalves">
+            <input type="range" min="1" max="100" value="50" id="ctrlRange" oninput="handleSlider(this)" onmouseout="resetSlider(this)" ontouchend="resetSlider(this)">
+            <div id="leftCtrl"  class="mobileMoveCtrl"></div>
+            <div id="centrCtrl" class="mobileMoveCtrl"></div>
+            <div id="rightCtrl" class="mobileMoveCtrl"></div>
             <canvas width="200" height="200" id="topDownCanvas"></canvas>
             <canvas class="threeHalves" width="1080" height="720" id="renderCanvas"></canvas>
         </div>

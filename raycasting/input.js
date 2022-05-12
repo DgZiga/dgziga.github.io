@@ -30,3 +30,35 @@ function handleInput(){
         currentImg = centerImg;
     }
 }
+
+
+function pressLeft(){
+    inputMap[37]=true;
+}
+function pressRight(){
+    inputMap[39]=true;
+}
+
+function releaseLeft(){
+    inputMap[37]=false;
+}
+function releaseRight(){
+    inputMap[39]=false;
+}
+
+function handleSlider(slider){
+    if(slider.value <= 33){
+        pressLeft();
+    } else if(slider.value >= 66){
+        pressRight();
+    }else{
+        releaseLeft();
+        releaseRight();
+    }
+}
+
+function resetSlider(slider){
+    releaseLeft();
+    releaseRight();
+    slider.value=50;
+}
