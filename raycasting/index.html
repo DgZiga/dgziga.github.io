@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <style>
+
+            /* The animation code */
+            @keyframes bobbingTitle {
+            0%   {transform:scale(100%)}
+            50%  {transform:scale(120%)}
+            100% {transform:scale(100%)}
+            }
+            @font-face {
+                font-family: babyShrimp;
+                src: url(fonts/BabyShrimp-jERMv.ttf);
+            }
+
+            div {
+            font-family: babyShrimp;
+            }
+
+            body{
+                background-color: black;
+                margin: 0;
+                padding: 0;
+            }
+            .fullScreen {
+                height: 100vh;
+                width: 100vw;
+            }
+            .threeHalves {
+                height: 100vh;
+                aspect-ratio: 3 / 2;
+                max-width: 100vw;
+            }
+            #render{
+                margin: 0 auto;
+                position: relative;
+            }
+            #topDownCanvas{
+                position: absolute;
+                width: 16%;
+                aspect-ratio: 1 / 1;
+                top: 0;
+                right: 0;
+            }
+            #mainMenu{
+                position: absolute;
+                top:0;
+                text-align: center;
+                background-color: #add8e6;
+            }
+            #title{
+                animation-name: bobbingTitle;
+                animation-duration: 3s;
+                animation-iteration-count: infinite
+            }
+            #subtitle{
+                margin-top: -22px;
+                margin-left: 41px;
+                font-size: 9px;
+            }
+            .mainMenuButton{
+                cursor: pointer;
+                background-color: #83b7e6;
+                border-radius: 50%;
+                padding: 3px 8px;
+                border: 1px solid black;
+            }
+            #levelEditor{
+                top:0;
+                left: 0;
+                position: absolute;
+                background-color: red;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="render" class="threeHalves">
+            <canvas width="200" height="200" id="topDownCanvas"></canvas>
+            <canvas class="threeHalves" width="1080" height="720" id="renderCanvas"></canvas>
+        </div>
+        <div id="mainMenu" class="fullScreen">
+            <h1 id="title">Baby Rider</h1>
+            <p id="subtitle">(O come diavolo vuoi chiamarlo)</p>
+            <span class="mainMenuButton" onclick="startGame()">play</span><br /><br />
+            <span class="mainMenuButton" onclick="startLevelEditor()">level editor</span><br /><br />
+            <span class="mainMenuButton">options</span>
+
+        </div>
+        <div id="levelEditor" class="fullScreen">
+            <div id="levelEditorSize">
+                Righe: <input type="number" />
+                Colonne:<input type="number" />
+            </div>
+            <div id="levelEditorGrid"></div>
+        </div>
+        <img src="img/center.png" style="display: none;" id="center">
+        <img src="img/left.png" style="display: none;" id="left">
+        <img src="img/right.png" style="display: none;" id="right">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="utils.js"></script>
+        <script src="raycaster.js"></script>
+        <script src="input.js"></script>
+        <script src="player.js"></script>
+        <script src="arrays.js"></script>
+        <script src="graphics.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
