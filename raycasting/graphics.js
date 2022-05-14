@@ -3,8 +3,8 @@ var renderCtx = $("#renderCanvas")[0].getContext("2d");
 
 var topDownCanvasW = $("#topDownCanvas")[0].width;
 var topDownCanvasH = $("#topDownCanvas")[0].height;
-var cellH = 20;
-var cellW = 20;
+var cellH = 32;
+var cellW = 32;
 var topDownWallH = topDownCanvasH/MAP_H;
 var topDownWallW = topDownCanvasW/MAP_W ;
 
@@ -42,16 +42,17 @@ function fillTopDownWalls(){
     }
 }
 
-const PLAYER_RAY_LEN = 10;
+const PLAYER_COORD_SCALING = cellH/topDownWallH;
+const PLAYER_RAY_LEN = 20/PLAYER_COORD_SCALING;
 
 function drawTopDownPlayer(){
     topDownCtx.fillStyle = "#FF0000";
-    topDownCtx.fillRect(player.x-2, player.y-2, 3, 3);
+    topDownCtx.fillRect(player.x/PLAYER_COORD_SCALING-2, player.y/PLAYER_COORD_SCALING-2, 3, 3);
     topDownCtx.beginPath();
     topDownCtx.lineWidth=1;
     topDownCtx.strokeStyle="#FF0000"
-    topDownCtx.moveTo(player.x, player.y);
-    topDownCtx.lineTo(player.x+player.cosa*PLAYER_RAY_LEN, player.y-player.sina*PLAYER_RAY_LEN);
+    topDownCtx.moveTo(player.x/PLAYER_COORD_SCALING, player.y/PLAYER_COORD_SCALING);
+    topDownCtx.lineTo(player.x/PLAYER_COORD_SCALING+player.cosa*PLAYER_RAY_LEN, player.y/PLAYER_COORD_SCALING-player.sina*PLAYER_RAY_LEN);
     topDownCtx.stroke();
 }
 

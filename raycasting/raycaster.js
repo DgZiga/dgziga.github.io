@@ -1,8 +1,11 @@
 var debug = false;
 
 const ONE_DEG_TO_RAD = 0.0174533;
-const RAYS_NO = 60;
+const RAYS_NO = 240;
+const FOV = 60; //deg
+const RAYS_DEGREE_INCREMENT = ONE_DEG_TO_RAD/(RAYS_NO/FOV);
 const HALD_RAYS_NO = RAYS_NO/2;
+const LINE_WIDTH_COMPENSATION = 2; //if we were to draw a line exactly (renderCanvasW / RAYS_NO)px wide, the canvas would break (small gaps would form), so we are adding a little bit of imprecision to fix this
 const RENDER_WIDTH_PER_RAY = renderCanvasW / RAYS_NO;
 const DEFAULT_TMP_DIST = 9999999;
 
@@ -25,7 +28,7 @@ function castRay(){
 
     var rayCounter = HALD_RAYS_NO*-1
     for(var i=0; i<RAYS_NO; i++){
-        var rayA = radBoundaries(player.a*1 + rayCounter*ONE_DEG_TO_RAD);
+        var rayA = radBoundaries(player.a*1 + rayCounter*RAYS_DEGREE_INCREMENT);
         rayCounter++;
         var tan = Math.tan(rayA);
         var aTan = 1/tan;
@@ -42,21 +45,21 @@ function castRay(){
             dof = MAP_W;
         } else if( Math.cos(rayA) < 0){ //looking left
             debug && console.log("lookingLeft");
-            rayX = Math.floor(player.x/topDownWallW)*topDownWallW-0.0001;
+            rayX = Math.floor(player.x/cellW)*cellW-0.0001;
             rayY = (player.x-rayX)*tan+player.y;
-            rayOX = -topDownWallW; 
+            rayOX = -cellW; 
             rayOY = -1*rayOX*tan;
         } else { //Looking right
             debug && console.log("lookingRight");
-            rayX = Math.floor(player.x/topDownWallW)*topDownWallW+topDownWallW*1;
+            rayX = Math.floor(player.x/cellW)*cellW+cellW*1;
             rayY = (player.x-rayX)*tan+player.y;
-            rayOX = topDownWallW; 
+            rayOX = cellW; 
             rayOY = -1*rayOX*tan;
         }
         debug && console.log("rayY: "+ rayY);debug && console.log("rayX: "+ rayX);debug && console.log("rayOY: "+ rayOY);debug && console.log("rayOX: "+ rayOX);var color = "#0000FF"
         while(dof < MAP_W && rayX > 0 && rayY > 0){
-            mapX = Math.floor(rayX/topDownWallW);
-            mapY = Math.floor(rayY/topDownWallH);
+            mapX = Math.floor(rayX/cellW);
+            mapY = Math.floor(rayY/cellH);
             mapI = mapX*1+mapY*MAP_W;
             debug && console.log("trying mapX: "+ mapX + ", mapY: "+mapY+", mapI: "+mapI);
             if(walls[mapI] == 1){
@@ -82,21 +85,21 @@ function castRay(){
             dof = MAP_W;
         } else if( Math.sin(rayA) > 0){ //looking Up
             debug && console.log("lookingUp");
-            rayY = Math.floor(player.y/topDownWallH)*topDownWallH-0.0001;
+            rayY = Math.floor(player.y/cellH)*cellH-0.0001;
             rayX = (player.y-rayY)*aTan+player.x;
-            rayOY = -topDownWallH;
+            rayOY = -cellH;
             rayOX = -1*rayOY*aTan;
         } else { //Looking down
             debug && console.log("lookingDown");
-            rayY = Math.floor(player.y/topDownWallH)*topDownWallH+topDownWallW*1;
+            rayY = Math.floor(player.y/cellH)*cellH+cellW*1;
             rayX = (player.y-rayY)*aTan+player.x;
-            rayOY = topDownWallH;
+            rayOY = cellH;
             rayOX = -1*rayOY*aTan;
         }
         debug && console.log("rayY: "+ rayY);debug && console.log("rayX: "+ rayX);debug && console.log("rayOY: "+ rayOY);debug && console.log("rayOX: "+ rayOX);
         while(dof < MAP_W && rayX > 0 && rayY > 0){
-            mapX = Math.floor(rayX/topDownWallW);
-            mapY = Math.floor(rayY/topDownWallH);
+            mapX = Math.floor(rayX/cellW);
+            mapY = Math.floor(rayY/cellH);
             mapI = mapX*1+mapY*MAP_W;
             debug && console.log("trying mapX: "+ mapX + ", mapY: "+mapY+", mapI: "+mapI);
             if(walls[mapI] == 1){
@@ -122,8 +125,8 @@ function castRay(){
             topDownCtx.beginPath();
             topDownCtx.lineWidth=1;
             topDownCtx.strokeStyle="#00FF00"
-            topDownCtx.moveTo(player.x, player.y);
-            topDownCtx.lineTo(finalX, finalY);
+            topDownCtx.moveTo(player.x/PLAYER_COORD_SCALING, player.y/PLAYER_COORD_SCALING);
+            topDownCtx.lineTo(finalX/PLAYER_COORD_SCALING, finalY/PLAYER_COORD_SCALING);
             topDownCtx.stroke();
 
             //Fix fisheye
@@ -131,11 +134,11 @@ function castRay(){
             tmpDist = tmpDist * Math.cos(deltaAngle);
 
             //Calc lineH
-            var lineH = renderCanvasH * topDownWallH / tmpDist;
+            var lineH = renderCanvasH * cellH / tmpDist;
             lineH = lineH > renderCanvasH ? renderCanvasH : lineH;
 
             //Render
-            renderCtx.lineWidth=RENDER_WIDTH_PER_RAY;
+            renderCtx.lineWidth=RENDER_WIDTH_PER_RAY+LINE_WIDTH_COMPENSATION;
             
             //Draw ceiling
             renderCtx.beginPath();

@@ -1,0 +1,30 @@
+
+@keyframes bobbingTitle {
+    0%   {transform:scale(100%)}
+    50%  {transform:scale(120%)}
+    100% {transform:scale(100%)}
+}
+#mainMenu{
+    position: absolute;
+    top:0;
+    text-align: center;
+    background-color: #add8e6;
+    z-index: 3;
+}
+#title{
+    animation-name: bobbingTitle;
+    animation-duration: 3s;
+    animation-iteration-count: infinite
+}
+#subtitle{
+    margin-top: -22px;
+    margin-left: 41px;
+    font-size: 9px;
+}
+.mainMenuButton{
+    cursor: pointer;
+    background-color: #83b7e6;
+    border-radius: 50%;
+    padding: 3px 8px;
+    border: 1px solid black;
+}

@@ -1,10 +1,10 @@
 function checkMovement(newX, newY){
-    var i= Math.floor(newX / topDownWallW);
-    var j= Math.floor(newY / topDownWallH);
+    var i= Math.floor(newX / cellW);
+    var j= Math.floor(newY / cellH);
     return walls[i*1+j*MAP_W] == 0
 }
 
-const WALL_PAD_AMT = 20;
+const WALL_PAD_AMT = 10;
 
 function goForwards(player, amount){
     var newY =player.y - amount * player.sina;
@@ -71,4 +71,4 @@ class Player{
     }
 }
 
-const player = new Player(9,9, Math.PI/4*-1);
+const player = new Player(7*cellW,3*cellH, Math.PI/4*-1);
