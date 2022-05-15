@@ -71,4 +71,4 @@ class Player{
     }
 }
 
-const player = new Player(7*cellW,3*cellH, Math.PI/4*-1);
+const player = new Player(4*cellW,20*cellH, Math.PI/4*-1);

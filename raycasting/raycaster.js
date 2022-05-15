@@ -1,13 +1,18 @@
 var debug = false;
 
 const ONE_DEG_TO_RAD = 0.0174533;
-const RAYS_NO = 240;
+const RAYS_NO = 120;
 const FOV = 60; //deg
-const RAYS_DEGREE_INCREMENT = ONE_DEG_TO_RAD/(RAYS_NO/FOV);
+const RAYS_ANGLE_INCREMENT = ONE_DEG_TO_RAD/(RAYS_NO/FOV);
 const HALD_RAYS_NO = RAYS_NO/2;
 const LINE_WIDTH_COMPENSATION = 2; //if we were to draw a line exactly (renderCanvasW / RAYS_NO)px wide, the canvas would break (small gaps would form), so we are adding a little bit of imprecision to fix this
 const RENDER_WIDTH_PER_RAY = renderCanvasW / RAYS_NO;
+const PLANE_DISTANCE = (renderCanvasW/2)/(Math.tan(FOV*ONE_DEG_TO_RAD/2))
 const DEFAULT_TMP_DIST = 9999999;
+const PLAYER_HEIGHT = 13; //IDK, magic number
+const TEXTURE_W = 32;
+const TEXTURE_H = 32;
+const COLOR_SPACE = 3 //each pixel is described by 3 values: r, g, and b 
 
 //Pitagora
 function distance(srcX, srcY, dstX, dstY){
@@ -28,7 +33,7 @@ function castRay(){
 
     var rayCounter = HALD_RAYS_NO*-1
     for(var i=0; i<RAYS_NO; i++){
-        var rayA = radBoundaries(player.a*1 + rayCounter*RAYS_DEGREE_INCREMENT);
+        var rayA = radBoundaries(player.a*1 + rayCounter*RAYS_ANGLE_INCREMENT);
         rayCounter++;
         var tan = Math.tan(rayA);
         var aTan = 1/tan;
@@ -120,14 +125,15 @@ function castRay(){
             }
         }
         if(tmpDist != 0 && tmpDist != DEFAULT_TMP_DIST){ //found collision
-
-            //Stroke 2d topdown
-            topDownCtx.beginPath();
-            topDownCtx.lineWidth=1;
-            topDownCtx.strokeStyle="#00FF00"
-            topDownCtx.moveTo(player.x/PLAYER_COORD_SCALING, player.y/PLAYER_COORD_SCALING);
-            topDownCtx.lineTo(finalX/PLAYER_COORD_SCALING, finalY/PLAYER_COORD_SCALING);
-            topDownCtx.stroke();
+            if(debug){
+                //Stroke 2d topdown
+                topDownCtx.beginPath();
+                topDownCtx.lineWidth=1;
+                topDownCtx.strokeStyle="#00FF00"
+                topDownCtx.moveTo(player.x/PLAYER_COORD_SCALING, player.y/PLAYER_COORD_SCALING);
+                topDownCtx.lineTo(finalX/PLAYER_COORD_SCALING, finalY/PLAYER_COORD_SCALING);
+                topDownCtx.stroke(); 
+            }
 
             //Fix fisheye
             var deltaAngle = radBoundaries(player.a - rayA);
@@ -153,11 +159,49 @@ function castRay(){
             renderCtx.lineTo(renderCanvasW-RENDER_WIDTH_PER_RAY * i, renderCanvasH/2 + lineH/2);
             renderCtx.stroke();
             //Draw floor
+
+
+ 
+            for(var j =renderCanvasH/2 + lineH/2; j<renderCanvasH; j++){
+
+                //values from https://wynnliam.github.io/raycaster/news/tutorial/2019/04/09/raycaster-part-03.html#:~:text=Floor%20casting%20is%20an%20inverse,a%20floor%20texture%20to%20render.
+                var r=j-renderCanvasH/2; //projected floor point row, distance from middle of the screen
+
+                var s = PLAYER_HEIGHT*PLANE_DISTANCE/r; //straightLineDistance: distance from the player to the point in the world at height r (if the player is looking straight on)
+
+                var beta=radBoundaries(rayA-player.a); //angle of view relative to the player's "straight-on" angle
+
+                var d = s/Math.cos(beta); //distance from the player to the point of this ray (s adjusted for beta)
+
+                var mapX = Math.floor(player.x + Math.cos(rayA) * d);
+                var mapY = Math.floor(player.y - Math.sin(rayA) * d); //subtract because y is flipped
+                
+                var wallsX = Math.floor(mapX/cellW);
+                var wallsY = Math.floor(mapY/cellH);
+
+
+                if(walls[wallsX*1+wallsY*MAP_W] == 0){
+                    //TODO: check for textures
+
+                    var textureX = Math.floor(mapX % TEXTURE_W);
+                    var textureY = Math.floor(mapY % TEXTURE_H);
+                    var firstIndex = (textureX+textureY*TEXTURE_W)*COLOR_SPACE;
+
+                    var red = ROAD_TEXTURE[firstIndex];
+                    var green = ROAD_TEXTURE[firstIndex*1+1];
+                    var blue = ROAD_TEXTURE[firstIndex*1+2];
+
+                    renderCtx.fillStyle = "rgba("+red+","+green+","+blue+",255)";
+                    renderCtx.fillRect(renderCanvasW-RENDER_WIDTH_PER_RAY*i, j, RENDER_WIDTH_PER_RAY+10, 1 );
+                }
+
+            } 
+ /* 
             renderCtx.beginPath();
             renderCtx.strokeStyle="#3be351"
             renderCtx.moveTo(renderCanvasW-RENDER_WIDTH_PER_RAY * i, renderCanvasH/2 + lineH/2);
             renderCtx.lineTo(renderCanvasW-RENDER_WIDTH_PER_RAY * i, renderCanvasH);
-            renderCtx.stroke();
+            renderCtx.stroke();  */
             
         } else {
 
@@ -168,13 +212,16 @@ function castRay(){
             renderCtx.lineTo(renderCanvasW-RENDER_WIDTH_PER_RAY * i, renderCanvasH/2);
             renderCtx.stroke();
             //Draw floor
+            
             renderCtx.beginPath();
             renderCtx.strokeStyle="#3be351"
             renderCtx.moveTo(renderCanvasW-RENDER_WIDTH_PER_RAY * i, renderCanvasH/2);
             renderCtx.lineTo(renderCanvasW-RENDER_WIDTH_PER_RAY * i, renderCanvasH);
-            renderCtx.stroke();
+            renderCtx.stroke(); 
 
         }
 
     }
 }
+
+var done = false;
