@@ -57,7 +57,7 @@ function renderMode7(){
     }
 
     // Starting with furthest away line and work towards the camera point
-    for (var y = 20; y < renderCanvasH / 2; y+=2) {
+    for (var y = 20; y < renderCanvasH / 2; y+=graphicsQuality) {
         // Take a sample point for depth linearly related to rows down screen
         var fSampleDepth = y/ (renderCanvasH / 2);
 
@@ -70,7 +70,7 @@ function renderMode7(){
 
 
         // Linearly interpolate lines across the screen
-        for (var x = 0; x < renderCanvasW; x+=2) {
+        for (var x = 0; x < renderCanvasW; x+=graphicsQuality) {
             var fSampleWidth = x / renderCanvasW;
             var fSampleX = (fEndX - fStartX) * fSampleWidth + fStartX;
             var fSampleY = (fEndY - fStartY) * fSampleWidth + fStartY;
@@ -93,7 +93,7 @@ function renderMode7(){
             var blue = MARIO_KART_CIRCUIT_4_TEXTURE[firstIndex*1+2];
 
             renderCtx.fillStyle = "rgba("+red+","+green+","+blue+",255)";
-            renderCtx.fillRect(x, y+renderCanvasH / 2, 2, 2 );
+            renderCtx.fillRect(x, y+renderCanvasH / 2, graphicsQuality, graphicsQuality );
 
             // Sample symbol and colour from sky sprite, we can use same
             // coordinates, but we need to draw the "inverted" y-location

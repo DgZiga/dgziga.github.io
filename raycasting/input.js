@@ -1,4 +1,4 @@
-const MOV_SPEED = 0.005;
+const MOV_SPEED = 0.001;
 const PI_PERCENTILE = Math.PI/100;
 const ROT_SPEED = PI_PERCENTILE*2;
 
@@ -24,20 +24,22 @@ onkeydown = onkeyup = function(e){
 function handleInput(){
     var rotating = false;
     if(inputMap[BUTTON_LEFT]){ //sx
-        player.moveTowards(Direction.TURN_R, ROT_SPEED);
+        player.turn(ROT_SPEED);
         currentImg = leftImg;
         rotating = true;
     }
     if(inputMap[BUTTON_FORWARDS]){ //forwards
-        player.moveTowards(Direction.FORWARD, MOV_SPEED);
+        player.moveTowards(MOV_SPEED);
+    } else {
+        player.decellerate(MOV_SPEED);
     }
     if(inputMap[BUTTON_RIGHT]){ //dx
-        player.moveTowards(Direction.TURN_L, ROT_SPEED);
+        player.turn(-ROT_SPEED);
         currentImg = rightImg;
         rotating = true;
     }
     if(inputMap[BUTTON_BACKWARDS]){ //backwards
-        player.moveTowards(Direction.BACK, MOV_SPEED);
+        player.moveTowards(-MOV_SPEED);
     }
 
     //mode7 params

@@ -47,6 +47,23 @@
     border-top-right-radius: 25%;
     border-bottom-right-radius: 25%;
 }
+#speedGauge{
+    left: 1vw;
+    top: 5vh;
+    width: 15vw;
+    height: 30vh;
+    position: absolute;
+    border: 2px solid gray;
+}
+#emptySpeedMeter{
+    width: 15vw;
+    height: 29vh;
+}
+#speedMeter{
+    width: 15vw;
+    height: 1vh;
+    background-color: lime;
+}
 #ctrlRange{
     position: absolute;
     bottom: 1vh;

@@ -17,3 +17,8 @@ function startLevelEditor(){
     closeMainMenu();
     $("#levelEditor").show();
 }
+
+function startOptionsMenu(){
+    closeMainMenu();
+    $("#optionMenu").show();
+}

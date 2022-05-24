@@ -74,6 +74,15 @@ function schifo(){
     }
 }
 
+const SPEED_GAUGE_MAX = 30; //vh
+
+function updateSpeedGauge(speed){
+    var h = Math.abs(speed) * SPEED_GAUGE_MAX / MAX_SPEED ;
+    var negative = SPEED_GAUGE_MAX-h;
+    $("#speedMeter")[0].style.height = h+"vh";
+    $("#emptySpeedMeter")[0].style.height = negative+"vh";
+}
+
 let lastValidTimestamp = -1;
 const TARGET_FPS = 60;
 const TARGET_MS = 1000/TARGET_FPS;

@@ -4,21 +4,14 @@ function checkMovement(newX, newY){
     return walls[i*1+j*MAP_W] != 1
 }
 
-const WALL_PAD_AMT = MOV_SPEED;
+const MAX_SPEED = MOV_SPEED*5
+const WALL_PAD_AMT = MAX_SPEED;
 
 function goForwards(player, amount){
     var newY =player.y - amount * player.sina;
     var newX =player.x + amount * player.cosa;
     var checkY =player.y - WALL_PAD_AMT * player.sina;
     var checkX =player.x + WALL_PAD_AMT * player.cosa;
-    tryMovePlayer(newX, newY, checkX, checkY);
-}
-
-function goBackwards(player, amount){
-    var newY =player.y + amount * player.sina;
-    var newX =player.x - amount * player.cosa;
-    var checkY =player.y + WALL_PAD_AMT * player.sina;
-    var checkX =player.x - WALL_PAD_AMT * player.cosa;
     tryMovePlayer(newX, newY, checkX, checkY);
 }
 
@@ -31,25 +24,13 @@ function tryMovePlayer(newX, newY, checkX, checkY){
     }
 }
 
-class Direction {
-    // Create new instances of the same class as static attributes
-    static FORWARD  = new Direction("FORWARD", goForwards)
-    static BACK     = new Direction("DOWN"   , goBackwards)
-    static TURN_L   = new Direction("TURN_L" , function(player, amount){player.a-=amount; })   
-    static TURN_R   = new Direction("TURN_R" , function(player, amount){player.a+=amount; })   
-  
-    constructor(name, movementFunc) {
-      this.name = name
-      this.movementFunc = movementFunc;
-    }
-}
-
 class Player{
     constructor(x, y, a){
         this.x = x;
         this.y = y;
         this.a = a;
         this.updateInternal();
+        this.speed = 0;
     }
 
     moveTo(x, y, a){
@@ -58,6 +39,20 @@ class Player{
         this.a = a;
         this.updateInternal();
     }
+    
+    accellerate(amt){
+        this.speed+=amt;
+        if(this.speed > MAX_SPEED){
+            this.speed = MAX_SPEED;
+        }
+        if(this.speed < -MAX_SPEED){
+            this.speed = -MAX_SPEED;
+        }
+    }
+
+    setSpeed(amt){
+        this.speed=amt;
+    }
 
     updateInternal(){
         this.a = radBoundaries(this.a);
@@ -65,9 +60,21 @@ class Player{
         this.sina = Math.sin(this.a);
     }
 
-    moveTowards(direction, amount){
-        direction.movementFunc(this, amount);
+    moveTowards(amount){
+        this.accellerate(amount/10);
+        goForwards(this, this.speed);
+        updateSpeedGauge(this.speed);
         this.updateInternal();
+    }
+
+    decellerate(amount){
+        if(this.speed > 0){
+            this.moveTowards(-amount);
+        }
+    }
+
+    turn(amt){
+        player.a+=amt;
     }
 }
 

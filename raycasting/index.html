@@ -3,6 +3,7 @@
         <link rel="stylesheet" href="css/game.css">
         <link rel="stylesheet" href="css/mainmenu.css">
         <link rel="stylesheet" href="css/leveleditor.css">
+        <link rel="stylesheet" href="css/optionmenu.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <style>
             @font-face {
@@ -32,6 +33,7 @@
             <div id="leftCtrl"  class="mobileButton"></div>
             <div id="centrCtrl" class="mobileButton"></div>
             <div id="rightCtrl" class="mobileButton"></div>
+            <div id="speedGauge"><div id="emptySpeedMeter"></div><div id="speedMeter"></div></div>
             <div ontouchstart="pressButton(BUTTON_FORWARDS)" ontouchend="releaseButton(BUTTON_FORWARDS)" id="fowardPedal" class="mobileButton"><p class="pedalTxt">Fw</p></div>
             <div ontouchstart="pressButton(BUTTON_BACKWARDS)" ontouchend="releaseButton(BUTTON_BACKWARDS)" id="backwardsPedal" class="mobileButton"><p class="pedalTxt">Bw</p></div>
             <canvas width="200" height="200" id="topDownCanvas"></canvas>
@@ -42,7 +44,7 @@
             <p id="subtitle">(O come diavolo vuoi chiamarlo)</p>
             <span class="mainMenuButton" onclick="startGame()">play</span><br /><br />
             <span class="mainMenuButton" onclick="startLevelEditor()">level editor</span><br /><br />
-            <span class="mainMenuButton">options</span>
+            <span class="mainMenuButton" onclick="startOptionsMenu()">options</span>
 
         </div>
         <div id="levelEditor" class="fullScreen">
@@ -60,6 +62,10 @@
             <img src="img/right.png" style="display: none;" id="overlayImg">
             <div id="levelEditorGrid"></div>
         </div>
+        <div id="optionMenu" class="fullScreen">
+            Graphics quality: <input type="range" min="1" max="5" value="4" id="grQualitySlider" oninput="handleQualitySlider(this)">
+            <button type="button" onclick="closeOptionsMenu()">Close</button>
+        </div>
         <img src="img/center.png" style="display: none;" id="center">
         <img src="img/left.png" style="display: none;" id="left">
         <img src="img/right.png" style="display: none;" id="right">
@@ -69,6 +75,7 @@
         <script src="textures/roadTexture.js"></script>
         <script src="textures/marioKart2.js"></script>
         <script src="textures/cactus.js"></script>
+        <script src="options.js"></script>
         <script src="mode7.js"></script>
         <script src="input.js"></script>
         <script src="marioLevelMap.js"></script>
