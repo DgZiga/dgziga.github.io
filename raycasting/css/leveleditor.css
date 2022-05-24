@@ -1,0 +1,43 @@
+
+#levelEditor{
+    top:0;
+    left: 0;
+    position: absolute;
+    display: none;
+    background-color: white;
+    z-index: 2;
+}
+#levelEditorCommands{
+    width: 100vw;
+    height: 10vh;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+    position: relative;
+}
+#levelEditorGrid{
+    width: 100vw;
+    height: 90vh;
+}
+.levelEditorGridBlock{
+    border: 1px solid black;
+    box-sizing: border-box;
+    float: left;
+}
+#paletteHolder{
+    position: absolute;
+    bottom: 0;
+}
+.paletteDiv{
+    margin: 0;
+    padding: 10px;
+    display: inline-block;
+}
+#overlayImg{
+    opacity: 0.3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 100vw;
+    height: 90vh;
+}

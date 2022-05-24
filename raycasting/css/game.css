@@ -1,0 +1,71 @@
+.threeHalves {
+    height: 100vh;
+    aspect-ratio: 3 / 2;
+    max-width: 100vw;
+}
+#render{
+    height: 85vh;
+    margin: 0 auto;
+    margin-bottom: 15vh;
+    position: relative;
+    z-index: 1;
+}
+#renderCanvas{
+    width: 100%;
+    height: 100%;
+}
+#topDownCanvas{
+    position: absolute;
+    width: 16%; /* 16% */
+    aspect-ratio: 1 / 1;
+    top: 0;
+    right: 0;
+}
+.mobileButton{
+    text-align: center;
+    width: 10vw;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 1vh;
+    background-color: white;
+    border: 3px solid #808080;
+    opacity: 0.3;
+}
+#leftCtrl{
+    aspect-ratio: 2 / 1;
+    left: 2vw;
+    border-top-left-radius: 25%;
+    border-bottom-left-radius: 25%;
+}
+#centrCtrl{
+    aspect-ratio: 2 / 1;
+    left: 12vw;
+}
+#rightCtrl{
+    aspect-ratio: 2 / 1;
+    left: 22vw;
+    border-top-right-radius: 25%;
+    border-bottom-right-radius: 25%;
+}
+#ctrlRange{
+    position: absolute;
+    bottom: 1vh;
+    left: 2vw;
+    width: 30vw;
+    z-index: 999;
+    aspect-ratio: 6 / 1;
+    opacity: 0;
+}
+#backwardsPedal{
+    width: 8vw;
+    aspect-ratio: 1 / 1.5;
+    right: 2vw;
+}
+#fowardPedal{
+    width: 8vw;
+    aspect-ratio: 1 / 1.5;
+    right: 10vw;
+}
+.pedalTxt{
+    margin-top: 50%;;
+}

@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/game.css">
+        <link rel="stylesheet" href="css/mainmenu.css">
+        <link rel="stylesheet" href="css/leveleditor.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <style>
+            @font-face {
+                font-family: babyShrimp;
+                src: url(fonts/BabyShrimp-jERMv.ttf);
+            }
+
+            div {
+            font-family: babyShrimp;
+            }
+
+            body{
+                background-color: white;
+                margin: 0;
+                padding: 0;
+            }
+            .fullScreen {
+                height: 100vh;
+                width: 100vw;
+            }
+           
+        </style>
+    </head>
+    <body>
+        <div id="render" class="threeHalves">
+            <input type="range" min="1" max="100" value="50" id="ctrlRange" oninput="handleSlider(this)" onmouseout="resetSlider(this)" ontouchend="resetSlider(this)">
+            <div id="leftCtrl"  class="mobileButton"></div>
+            <div id="centrCtrl" class="mobileButton"></div>
+            <div id="rightCtrl" class="mobileButton"></div>
+            <div ontouchstart="pressButton(BUTTON_FORWARDS)" ontouchend="releaseButton(BUTTON_FORWARDS)" id="fowardPedal" class="mobileButton"><p class="pedalTxt">Fw</p></div>
+            <div ontouchstart="pressButton(BUTTON_BACKWARDS)" ontouchend="releaseButton(BUTTON_BACKWARDS)" id="backwardsPedal" class="mobileButton"><p class="pedalTxt">Bw</p></div>
+            <canvas width="200" height="200" id="topDownCanvas"></canvas>
+            <canvas width="480" height="360" id="renderCanvas"></canvas>
+        </div>
+        <div id="mainMenu" class="fullScreen">
+            <h1 id="title">Baby Rider</h1>
+            <p id="subtitle">(O come diavolo vuoi chiamarlo)</p>
+            <span class="mainMenuButton" onclick="startGame()">play</span><br /><br />
+            <span class="mainMenuButton" onclick="startLevelEditor()">level editor</span><br /><br />
+            <span class="mainMenuButton">options</span>
+
+        </div>
+        <div id="levelEditor" class="fullScreen">
+            <div id="levelEditorCommands">
+                Rows: <input type="number" id="levelEditorRows"/>
+                Columns:<input type="number" id="levelEditorColumns" />
+                <button type="button" onclick="applyLevelEditorChanges()">Apply</button>
+                <br/>
+                OverlapImage:<input type="text" id="overlapImgIn" />
+                <button type="button" onclick="showOverlapImg()">Show</button>
+                <br/>
+                <button type="button" onclick="exportLevelEditor()">Export</button>
+                <div id="paletteHolder"></div>
+            </div>
+            <img src="img/right.png" style="display: none;" id="overlayImg">
+            <div id="levelEditorGrid"></div>
+        </div>
+        <img src="img/center.png" style="display: none;" id="center">
+        <img src="img/left.png" style="display: none;" id="left">
+        <img src="img/right.png" style="display: none;" id="right">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="utils.js"></script>
+        <script src="textures/roadTexture.js"></script>
+        <script src="textures/marioKart2.js"></script>
+        <script src="textures/cactus.js"></script>
+        <script src="mode7.js"></script>
+        <script src="input.js"></script>
+        <script src="marioLevelMap.js"></script>
+        <script src="graphics.js"></script>
+        <script src="leveleditor.js"></script>
+        <script src="player.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
