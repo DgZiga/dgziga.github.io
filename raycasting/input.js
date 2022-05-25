@@ -116,10 +116,15 @@ function releaseAll(){
     releaseButton(BUTTON_RIGHT);
 }
 
-$("#leftCtrl")[0].addEventListener('touchmove', handleMobileTurn); 
+$("#leftCtrl")[0].addEventListener ('touchmove', handleMobileTurn); 
 $("#centrCtrl")[0].addEventListener('touchmove', handleMobileTurn); 
 $("#rightCtrl")[0].addEventListener('touchmove', handleMobileTurn); 
-$("#leftCtrl")[0].addEventListener('touchend', releaseAll); 
+
+$("#leftCtrl")[0].addEventListener ('touchstart', handleMobileTurn); 
+$("#centrCtrl")[0].addEventListener('touchstart', handleMobileTurn); 
+$("#rightCtrl")[0].addEventListener('touchstart', handleMobileTurn); 
+
+$("#leftCtrl")[0].addEventListener ('touchend', releaseAll); 
 $("#centrCtrl")[0].addEventListener('touchend', releaseAll); 
 $("#rightCtrl")[0].addEventListener('touchend', releaseAll); 
 
