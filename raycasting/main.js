@@ -1,8 +1,11 @@
 document.body.addEventListener('touchmove', function(event) {
     event.preventDefault();
   }, { passive: false }); 
-  $("#ctrlRange")[0].addEventListener('touchmove', function(event) {
-    event.stopPropagation();}); 
+
+/* $("#ctrlRange")[0].addEventListener('touchmove', function(event) {
+    event.stopPropagation();
+}); */
+
 
 function closeMainMenu(){
     $("#mainMenu").hide();

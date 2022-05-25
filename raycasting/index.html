@@ -29,10 +29,10 @@
     </head>
     <body>
         <div id="render" class="threeHalves">
-            <input type="range" min="1" max="100" value="50" id="ctrlRange" oninput="handleSlider(this)" onmouseout="resetSlider(this)" ontouchend="resetSlider(this)">
-            <div id="leftCtrl"  class="mobileButton"></div>
-            <div id="centrCtrl" class="mobileButton"></div>
-            <div id="rightCtrl" class="mobileButton"></div>
+            <!--input type="range" min="1" max="100" value="50" id="ctrlRange" oninput="handleSlider(this)" onmouseout="resetSlider(this)" ontouchend="resetSlider(this)"-->
+            <div id="leftCtrl"  class="mobileButton" data-mov-button="37"></div>
+            <div id="centrCtrl" class="mobileButton" data-mov-button="0"></div>
+            <div id="rightCtrl" class="mobileButton" data-mov-button="39"></div>
             <div id="speedGauge"><div id="emptySpeedMeter"></div><div id="speedMeter"></div></div>
             <div ontouchstart="pressButton(BUTTON_FORWARDS)" ontouchend="releaseButton(BUTTON_FORWARDS)" id="fowardPedal" class="mobileButton"><p class="pedalTxt">Fw</p></div>
             <div ontouchstart="pressButton(BUTTON_BACKWARDS)" ontouchend="releaseButton(BUTTON_BACKWARDS)" id="backwardsPedal" class="mobileButton"><p class="pedalTxt">Bw</p></div>

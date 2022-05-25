@@ -86,6 +86,31 @@ function handleSlider(slider){
     }
 }
 
+function handleMobileTurn(event){
+    event.stopPropagation();
+    var movButton =document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY).dataset.movButton;
+    if(movButton === undefined){
+        return;
+    }
+    releaseButton(BUTTON_LEFT);
+    releaseButton(BUTTON_RIGHT);
+    if(movButton !== 0){
+        pressButton(movButton);
+    }
+}
+
+function releaseAll(){
+    releaseButton(BUTTON_LEFT);
+    releaseButton(BUTTON_RIGHT);
+}
+
+$("#leftCtrl")[0].addEventListener('touchmove', handleMobileTurn); 
+$("#centrCtrl")[0].addEventListener('touchmove', handleMobileTurn); 
+$("#rightCtrl")[0].addEventListener('touchmove', handleMobileTurn); 
+$("#leftCtrl")[0].addEventListener('touchend', releaseAll); 
+$("#centrCtrl")[0].addEventListener('touchend', releaseAll); 
+$("#rightCtrl")[0].addEventListener('touchend', releaseAll); 
+
 function resetSlider(slider){
     releaseButton(BUTTON_LEFT);
     releaseButton(BUTTON_RIGHT);
