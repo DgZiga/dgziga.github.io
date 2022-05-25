@@ -75,6 +75,17 @@ function releaseButton(button){
     inputMap[button]=false;
 }
 
+function pressButtonAndPrevent(event, button){
+    event.preventDefault();
+    event.stopPropagation();
+    pressButton(button);
+}
+function releaseButtonAndPrevent(event, button){
+    event.preventDefault();
+    event.stopPropagation();
+    releaseButton(button);
+}
+
 function handleSlider(slider){
     if(slider.value <= 33){
         pressButton(BUTTON_LEFT);
