@@ -87,6 +87,7 @@ function handleSlider(slider){
 }
 
 function handleMobileTurn(event){
+    event.preventDefault();
     event.stopPropagation();
     var movButton =document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY).dataset.movButton;
     if(movButton === undefined){
