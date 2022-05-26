@@ -80,8 +80,9 @@
             <div id="levelEditorGrid"></div>
         </div>
         <div id="optionMenu" class="fullScreen">
-            Graphics quality: <input type="range" min="1" max="5" value="4" id="grQualitySlider" oninput="handleQualitySlider(this)">
-            <button type="button" onclick="closeOptionsMenu()">Close</button>
+            <h1>Options</h1>
+            <div class="optionsSettings">Graphics quality: <input type="range" min="1" max="5" value="4" id="grQualitySlider" oninput="handleQualitySlider(this)"></div><br /><br />
+            <button class="optionsSettings" type="button" onclick="closeOptionsMenu()">Close</button>
         </div>
         <img src="img/center.png" style="display: none;" id="center">
         <img src="img/left.png" style="display: none;" id="left">

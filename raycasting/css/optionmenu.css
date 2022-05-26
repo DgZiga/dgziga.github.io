@@ -4,6 +4,20 @@
     left: 0;
     position: absolute;
     display: none;
-    background-color: white;
+    background-color: #add8e6;
+    text-align: center;
     z-index: 2;
+}
+#title{
+    animation-name: bobbingTitle;
+    animation-duration: 3s;
+    animation-iteration-count: infinite
+}
+.optionsSettings{
+    background-color: #83b7e6;
+    border-radius: 50%;
+    border: 1px solid black;
+    display: inline-block;
+    font-family: babyShrimp;
+    padding: 5px 8px;
 }

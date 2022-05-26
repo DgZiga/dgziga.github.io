@@ -32,17 +32,17 @@
     opacity: 0.3;
 }
 #leftCtrl{
-    aspect-ratio: 2 / 1;
+    aspect-ratio: 2 / 1.5;
     left: 2vw;
     border-top-left-radius: 25%;
     border-bottom-left-radius: 25%;
 }
 #centrCtrl{
-    aspect-ratio: 2 / 1;
+    aspect-ratio: 2 / 1.5;
     left: 12vw;
 }
 #rightCtrl{
-    aspect-ratio: 2 / 1;
+    aspect-ratio: 2 / 1.5;
     left: 22vw;
     border-top-right-radius: 25%;
     border-bottom-right-radius: 25%;
