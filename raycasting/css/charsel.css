@@ -46,11 +46,11 @@
     width: 60vw;
     position: fixed;
     bottom: 2vh;
-    height: 40vh;
+    height: 30vh;
 }
 .charSelItem{
     width: 18vw;
-    height: 38vh;
+    height: 28vh;
     box-sizing: border-box;
     margin: 1vh 1vw;
     border: 3px solid #93b8c4;
@@ -59,7 +59,7 @@
 .charSelItemImg{
     box-sizing: border-box;
     border: 1px inset gray;
-    height: 28vh;
+    height: 18vh;
     width: 14vw;
     margin: 1vh 2vw; 
 }
