@@ -11,9 +11,9 @@ function closeMainMenu(){
     $("#mainMenu").hide();
 }
 
-function startGame(){
+function openCharSelection(){
     closeMainMenu();
-    requestAnimationFrame(gameTick);
+    selectCharAsPlayer(0); //default
 }
 
 function startLevelEditor(){

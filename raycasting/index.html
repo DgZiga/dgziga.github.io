@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="css/mainmenu.css">
         <link rel="stylesheet" href="css/leveleditor.css">
         <link rel="stylesheet" href="css/optionmenu.css">
+        <link rel="stylesheet" href="css/charsel.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <style>
             @font-face {
@@ -12,7 +13,7 @@
             }
 
             div {
-            font-family: babyShrimp;
+                font-family: babyShrimp;
             }
 
             body{
@@ -46,6 +47,34 @@
     </head>
     <body>
         <div id="portraitBlocker">Gira il telefono, figa!</div>
+        <div id="playerSelectionScreen" class="fullScreen">
+            <span id="charSelTitle">Seleziona un personaggio!</span>
+            <div id="mainCharSelMenu">
+                <span id="charSelSubtitle">NOME</span>
+                <table id="statsTable">
+                    <tr><td>Manovrabilità</td>   <td id="manovrabilitaTD">1</td></tr>
+                    <tr><td>Velocità massima</td><td id="masSpeedTD">2</td></tr>
+                    <tr><td>Accellerazione</td>  <td id="accelTD">3</td></tr>
+                    <tr><td>Sterrato</td>        <td id="sandTD">4</td></tr>
+                </table>
+                <div id="charPortraitDiv"><img id="charPortrtaitImg" src="img/center.png" ></div>
+            </div>
+            <div id="charSelSlider">
+                <div class="charSelItem" onclick="selectCharAsPlayer(0)">
+                    <img class="charSelItemImg" src="img/characters/compleAnna/portrait.png" >
+                    <span class="charSelName">CompleAnna</span>
+                </div>
+                <div class="charSelItem" onclick="selectCharAsPlayer(1)">
+                    <img class="charSelItemImg" src="img/characters/ugandaBaby/portrait.png" >
+                    <span class="charSelName">UgandaBaby</span>
+                </div>
+                <div class="charSelItem" onclick="selectCharAsPlayer(2)">
+                    <img class="charSelItemImg" src="img/characters/ciruzzo/portrait.png" >
+                    <span class="charSelName">Ciruzzo</span>
+                </div>
+            </div>
+            <span class="mainMenuButton" id="startGameButton" onclick="startGame()">Ready!</span><br /><br />
+        </div>
         <div id="render" class="threeHalves">
             <div id="leftCtrl"  class="mobileButton" data-mov-button="37"></div>
             <div id="centrCtrl" class="mobileButton" data-mov-button="0"></div>
@@ -59,7 +88,7 @@
         <div id="mainMenu" class="fullScreen">
             <h1 id="title">Baby Rider</h1>
             <p id="subtitle">(O come diavolo vuoi chiamarlo)</p>
-            <span class="mainMenuButton" onclick="startGame()">play</span><br /><br />
+            <span class="mainMenuButton" onclick="openCharSelection()">play</span><br /><br />
             <span class="mainMenuButton" onclick="startLevelEditor()">level editor</span><br /><br />
             <span class="mainMenuButton" onclick="startOptionsMenu()">options</span>
 
@@ -100,6 +129,7 @@
         <script src="graphics.js"></script>
         <script src="leveleditor.js"></script>
         <script src="player.js"></script>
+        <script src="characters.js"></script>
         <script src="main.js"></script>
     </body>
 </html>

@@ -1,0 +1,74 @@
+#playerSelectionScreen{
+    text-align: center;
+    background-color: #add8e6;
+}
+#charSelTitle{
+    font-size: 2em;
+    display: block;
+    height: 15vh;
+}
+#charSelSubtitle{
+    font-size: 1.5em;
+    display: block;
+    height: 15vh;
+    padding-top: 4vh;
+    box-sizing: border-box;
+}
+
+
+#mainCharSelMenu{
+    height: 85vh;
+    margin-left: 20vw;
+    width: 60vw;
+    text-align: left;
+    position: relative;
+}
+#charPortrtaitImg{
+    width: 100%;
+    height: 100%;;
+}
+#charName{
+    margin-left: 20vw;
+    text-align: left;
+    margin-bottom: 2vh;
+}
+#charPortraitDiv{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 40vh;
+    aspect-ratio: 1 / 1;
+}
+
+
+#charSelSlider{
+    left: 20vw;
+    width: 60vw;
+    position: fixed;
+    bottom: 2vh;
+    height: 40vh;
+}
+.charSelItem{
+    width: 18vw;
+    height: 38vh;
+    box-sizing: border-box;
+    margin: 1vh 1vw;
+    border: 3px solid #93b8c4;
+    float:left;
+}
+.charSelItemImg{
+    box-sizing: border-box;
+    border: 1px inset gray;
+    height: 28vh;
+    width: 14vw;
+    margin: 1vh 2vw; 
+}
+.charSelName{
+    height: 8vh;
+}
+
+#startGameButton{
+    position: fixed;
+    bottom: 6vh;
+    right: 7vw;
+}

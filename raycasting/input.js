@@ -1,12 +1,9 @@
-const MOV_SPEED = 0.001;
-const PI_PERCENTILE = Math.PI/100;
-const ROT_SPEED = PI_PERCENTILE*2;
+var   MOV_SPEED = 0.001;
 
 const BUTTON_LEFT = 37;
 const BUTTON_RIGHT = 39;
 const BUTTON_FORWARDS = 38;
 const BUTTON_BACKWARDS = 40;
-
 
 const BUTTON_Z = 90;
 const BUTTON_X = 88;
