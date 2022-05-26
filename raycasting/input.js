@@ -23,6 +23,7 @@ onkeydown = onkeyup = function(e){
 
 function handleInput(){
     var rotating = false;
+    var moving = false;
     if(inputMap[BUTTON_LEFT]){ //sx
         player.turn(ROT_SPEED);
         currentImg = leftImg;
@@ -30,8 +31,7 @@ function handleInput(){
     }
     if(inputMap[BUTTON_FORWARDS]){ //forwards
         player.moveTowards(MOV_SPEED);
-    } else {
-        player.decellerate(MOV_SPEED);
+        moving = true;
     }
     if(inputMap[BUTTON_RIGHT]){ //dx
         player.turn(-ROT_SPEED);
@@ -39,7 +39,11 @@ function handleInput(){
         rotating = true;
     }
     if(inputMap[BUTTON_BACKWARDS]){ //backwards
-        player.moveTowards(-MOV_SPEED);
+        player.moveTowards(-MOV_SPEED*2);
+        moving = true;
+    }
+    if(!moving){
+        player.decellerate(MOV_SPEED/2);
     }
 
     //mode7 params
@@ -86,17 +90,6 @@ function releaseButtonAndPrevent(event, button){
     releaseButton(button);
 }
 
-function handleSlider(slider){
-    if(slider.value <= 33){
-        pressButton(BUTTON_LEFT);
-    } else if(slider.value >= 66){
-        pressButton(BUTTON_RIGHT);
-    }else{
-        releaseButton(BUTTON_LEFT);
-        releaseButton(BUTTON_RIGHT);
-    }
-}
-
 function handleMobileTurn(event){
     event.preventDefault();
     event.stopPropagation();
@@ -127,9 +120,3 @@ $("#rightCtrl")[0].addEventListener('touchstart', handleMobileTurn);
 $("#leftCtrl")[0].addEventListener ('touchend', releaseAll); 
 $("#centrCtrl")[0].addEventListener('touchend', releaseAll); 
 $("#rightCtrl")[0].addEventListener('touchend', releaseAll); 
-
-function resetSlider(slider){
-    releaseButton(BUTTON_LEFT);
-    releaseButton(BUTTON_RIGHT);
-    slider.value=50;
-}

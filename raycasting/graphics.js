@@ -37,6 +37,12 @@ function fillTopDownWalls(){
             if(walls[x*1+y*MAP_W] == 1){
                 topDownCtx.fillStyle = "#000000";
                 topDownCtx.fillRect(x*topDownWallW, y*topDownWallH, topDownWallW, topDownWallH);
+            }else if(walls[x*1+y*MAP_W] == 2){
+                topDownCtx.fillStyle = "#c49000";
+                topDownCtx.fillRect(x*topDownWallW, y*topDownWallH, topDownWallW, topDownWallH);
+            }else{
+                topDownCtx.fillStyle = "#FFFFFF";
+                topDownCtx.fillRect(x*topDownWallW, y*topDownWallH, topDownWallW, topDownWallH);
             }
         }
     }
@@ -105,7 +111,7 @@ function gameTick(timestamp){
     topDownCtx.clearRect(0,0, topDownCanvasW, topDownCanvasH);
     renderCtx.clearRect(0,0, renderCanvasW, renderCanvasH);
 	fillTopDownWalls();
-    renderTopDownGrid();
+    //renderTopDownGrid();
     //castRay();
     renderMode7();
     drawTopDownPlayer();

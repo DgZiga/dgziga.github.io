@@ -8,6 +8,9 @@ const TEXTURE_W = 1024;
 const TEXTURE_H = 1024; 
 const COLOR_SPACE = 3 //each pixel is described by 3 values: r, g, and b 
 
+const OFFSET = 40;
+const RENDER_Y = renderCanvasH / 2 + OFFSET
+
 var drawTopDown = true;
 var done = false;
 
@@ -55,13 +58,11 @@ function renderMode7(){
         topDownCtx.lineTo(fFarX1 /PLAYER_COORD_SCALING, fFarY1 /PLAYER_COORD_SCALING);
         topDownCtx.stroke(); 
     }
-    const offset = 20;
-    const dist = renderCanvasH / 2 + offset
 
     // Starting with furthest away line and work towards the camera point
-    for (var y = 0; y < dist; y+=graphicsQuality) {
+    for (var y = OFFSET/2; y < RENDER_Y; y+=graphicsQuality) {
         // Take a sample point for depth linearly related to rows down screen
-        var fSampleDepth = y/ dist;
+        var fSampleDepth = y/ RENDER_Y;
 
         // Use sample point in non-linear (1/x) way to enable perspective
         // and grab start and end points for lines across the screen
@@ -95,7 +96,7 @@ function renderMode7(){
             var blue = MARIO_KART_CIRCUIT_4_TEXTURE[firstIndex*1+2];
 
             renderCtx.fillStyle = "rgba("+red+","+green+","+blue+",255)";
-            renderCtx.fillRect(x, y+renderCanvasH / 2-offset, graphicsQuality, graphicsQuality );
+            renderCtx.fillRect(x, y+renderCanvasH / 2-OFFSET, graphicsQuality, graphicsQuality );
 
             // Sample symbol and colour from sky sprite, we can use same
             // coordinates, but we need to draw the "inverted" y-location

@@ -5,13 +5,20 @@ function checkMovement(newX, newY){
 }
 
 const MAX_SPEED = MOV_SPEED*5
-const WALL_PAD_AMT = MAX_SPEED;
+const WALL_PAD_AMT = cellH*2;
 
 function goForwards(player, amount){
     var newY =player.y - amount * player.sina;
     var newX =player.x + amount * player.cosa;
-    var checkY =player.y - WALL_PAD_AMT * player.sina;
-    var checkX =player.x + WALL_PAD_AMT * player.cosa;
+    var checkY =player.y - WALL_PAD_AMT * player.sina;// check Forwards
+    var checkX =player.x + WALL_PAD_AMT * player.cosa;// check Forwards
+    tryMovePlayer(newX, newY, checkX, checkY);
+}
+function goBackwards(player, amount){
+    var newY =player.y - amount * player.sina;
+    var newX =player.x + amount * player.cosa;
+    var checkY =player.y + WALL_PAD_AMT * player.sina;// check Backwards
+    var checkX =player.x - WALL_PAD_AMT * player.cosa;// check Backwards
     tryMovePlayer(newX, newY, checkX, checkY);
 }
 
@@ -62,7 +69,11 @@ class Player{
 
     moveTowards(amount){
         this.accellerate(amount/10);
-        goForwards(this, this.speed);
+        if(this.speed>0){
+            goForwards(this, this.speed);
+        }else{
+            goBackwards(this, this.speed)
+        }
         updateSpeedGauge(this.speed);
         this.updateInternal();
     }
@@ -70,6 +81,8 @@ class Player{
     decellerate(amount){
         if(this.speed > 0){
             this.moveTowards(-amount);
+        }else if(this.speed < 0){
+            this.moveTowards(amount);
         }
     }
 
