@@ -16,7 +16,7 @@
             }
 
             body{
-                background-color: white;
+                background-color: black;
                 margin: 0;
                 padding: 0;
             }
@@ -24,10 +24,28 @@
                 height: 100vh;
                 width: 100vw;
             }
-           
+            @media (orientation: portrait) {
+                #portraitBlocker {
+                    width: 100vw;
+                    height: 100vh;
+                    background-color: black;
+                    color: white;
+                    text-align: center;
+                    display: block;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    z-index: 999;
+                    padding-top: 40vh;
+                }
+            }
+            @media (orientation: landscape) {
+                #portraitBlocker { display: none; }
+            }
         </style>
     </head>
     <body>
+        <div id="portraitBlocker">Gira il telefono, figa!</div>
         <div id="render" class="threeHalves">
             <div id="leftCtrl"  class="mobileButton" data-mov-button="37"></div>
             <div id="centrCtrl" class="mobileButton" data-mov-button="0"></div>

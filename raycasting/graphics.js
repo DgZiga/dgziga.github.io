@@ -82,8 +82,19 @@ function schifo(){
 
 const SPEED_GAUGE_MAX = 30; //vh
 
+function updateSpedGraphics(speed){
+    updateSpeedGauge(speed);
+    updateFOV(speed);
+}
+
+function updateFOV(speed){
+    var fov = Math.abs(speed) * MAX_FOV / GAME_MAX_SPEED ;
+    if(fov < MIN_FOV){fov = MIN_FOV}
+    FOV = fov;
+}
+
 function updateSpeedGauge(speed){
-    var h = Math.abs(speed) * SPEED_GAUGE_MAX / MAX_SPEED ;
+    var h = Math.abs(speed) * SPEED_GAUGE_MAX / GAME_MAX_SPEED ;
     var negative = SPEED_GAUGE_MAX-h;
     $("#speedMeter")[0].style.height = h+"vh";
     $("#emptySpeedMeter")[0].style.height = negative+"vh";

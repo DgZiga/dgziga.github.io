@@ -39,7 +39,7 @@ function handleInput(){
         rotating = true;
     }
     if(inputMap[BUTTON_BACKWARDS]){ //backwards
-        player.moveTowards(-MOV_SPEED*2);
+        player.moveTowards(-MOV_SPEED);
         moving = true;
     }
     if(!moving){

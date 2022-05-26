@@ -1,7 +1,9 @@
 var NEAR_PLANE = 0.03;
 var FAR_PLANE = 0.05;
 const ONE_DEG_TO_RAD = 0.0174533;
+const MIN_FOV = 60*ONE_DEG_TO_RAD;
 var FOV = 60*ONE_DEG_TO_RAD;
+const MAX_FOV = 90*ONE_DEG_TO_RAD;
 /* const TEXTURE_W = 32;
 const TEXTURE_H = 32; */
 const TEXTURE_W = 1024;
@@ -11,8 +13,7 @@ const COLOR_SPACE = 3 //each pixel is described by 3 values: r, g, and b
 const OFFSET = 40;
 const RENDER_Y = renderCanvasH / 2 + OFFSET
 
-var drawTopDown = true;
-var done = false;
+var drawTopDown = false;
 
 function renderMode7(){
     // Create Frustum corner points
@@ -27,7 +28,9 @@ function renderMode7(){
 
     var fNearX2 = player.x + Math.cos(player.a - FOV/2) * NEAR_PLANE;
     var fNearY2 = player.y - Math.sin(player.a - FOV/2) * NEAR_PLANE;
-
+    
+    renderCtx.fillStyle = "#add8e6";
+    renderCtx.fillRect(0, 0, renderCanvasW, renderCanvasH / 2);
     
     if(drawTopDown){
         topDownCtx.beginPath();

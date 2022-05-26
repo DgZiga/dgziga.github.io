@@ -4,7 +4,8 @@ function checkMovement(newX, newY){
     return walls[i*1+j*MAP_W] != 1
 }
 
-const MAX_SPEED = MOV_SPEED*5
+const GAME_MAX_SPEED = MOV_SPEED*5
+var   CURR_MAX_SPEED = MOV_SPEED*4
 const WALL_PAD_AMT = cellH*2;
 
 function goForwards(player, amount){
@@ -49,11 +50,11 @@ class Player{
     
     accellerate(amt){
         this.speed+=amt;
-        if(this.speed > MAX_SPEED){
-            this.speed = MAX_SPEED;
+        if(this.speed > CURR_MAX_SPEED){
+            this.speed = CURR_MAX_SPEED;
         }
-        if(this.speed < -MAX_SPEED){
-            this.speed = -MAX_SPEED;
+        if(this.speed < -CURR_MAX_SPEED){
+            this.speed = -CURR_MAX_SPEED;
         }
     }
 
@@ -67,22 +68,34 @@ class Player{
         this.sina = Math.sin(this.a);
     }
 
-    moveTowards(amount){
-        this.accellerate(amount/10);
+    moveTowards(amount, brakingAllowed=true){
         if(this.speed>0){
+            if(amount<0 && brakingAllowed){ //speed is positive but amount is negative: braking
+                this.accellerate(amount/5);
+            } else {
+                this.accellerate(amount/10);
+            }
             goForwards(this, this.speed);
         }else{
+            
+            this.accellerate(amount/10);
             goBackwards(this, this.speed)
         }
-        updateSpeedGauge(this.speed);
+        updateSpedGraphics(this.speed);
         this.updateInternal();
     }
 
     decellerate(amount){
+        if(Math.abs(this.speed) < amount){
+            this.speed = 0;
+            updateSpedGraphics(this.speed);
+            this.updateInternal();
+            return;
+        }
         if(this.speed > 0){
-            this.moveTowards(-amount);
+            this.moveTowards(-amount, false);
         }else if(this.speed < 0){
-            this.moveTowards(amount);
+            this.moveTowards(amount, false);
         }
     }
 
