@@ -25,7 +25,7 @@ function handleInput(){
     var rotating = false;
     var moving = false;
     if(inputMap[BUTTON_LEFT]){ //sx
-        player.turn(ROT_SPEED);
+        player.turn(1);
         currentImg = leftImg;
         rotating = true;
     }
@@ -34,7 +34,7 @@ function handleInput(){
         moving = true;
     }
     if(inputMap[BUTTON_RIGHT]){ //dx
-        player.turn(-ROT_SPEED);
+        player.turn(-1);
         currentImg = rightImg;
         rotating = true;
     }

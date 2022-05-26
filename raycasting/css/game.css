@@ -50,18 +50,18 @@
 #speedGauge{
     left: 1vw;
     top: 5vh;
-    width: 10vw;
+    width: 5vw;
     height: 30vh;
     position: absolute;
     border: 2px solid gray;
 }
 #emptySpeedMeter{
-    width: 10vw;
+    width: 5vw;
     height: 29vh;
     background-color: white;
 }
 #speedMeter{
-    width: 10vw;
+    width: 5vw;
     height: 1vh;
     background-color: lime;
 }

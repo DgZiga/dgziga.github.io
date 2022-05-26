@@ -5,7 +5,14 @@ function checkMovement(newX, newY){
 }
 
 const GAME_MAX_SPEED = MOV_SPEED*5
-var   CURR_MAX_SPEED = MOV_SPEED*4
+var PLAYER_MAX_SPEED = MOV_SPEED*4
+var   SAND_MAX_SPEED = MOV_SPEED*2
+var   CURR_MAX_SPEED = PLAYER_MAX_SPEED
+
+
+var PLAYER_MAX_ROT_ANGLE = PI_PERCENTILE*3
+var PLAYER_MIN_ROT_ANGLE = PI_PERCENTILE
+
 const WALL_PAD_AMT = cellH*2;
 
 function goForwards(player, amount){
@@ -30,6 +37,15 @@ function tryMovePlayer(newX, newY, checkX, checkY){
     if(checkMovement(player.x, checkY)){
         player.y=newY;
     }
+    //check Sand
+    var i= Math.floor(newX / cellW);
+    var j= Math.floor(newY / cellH);
+    if(walls[i*1+j*MAP_W] == 2){
+        CURR_MAX_SPEED = SAND_MAX_SPEED;
+    } else {
+        CURR_MAX_SPEED = PLAYER_MAX_SPEED;
+    }
+
 }
 
 class Player{
@@ -76,20 +92,18 @@ class Player{
                 this.accellerate(amount/10);
             }
             goForwards(this, this.speed);
+
         }else{
-            
             this.accellerate(amount/10);
             goBackwards(this, this.speed)
         }
         updateSpedGraphics(this.speed);
-        this.updateInternal();
     }
 
     decellerate(amount){
-        if(Math.abs(this.speed) < amount){
+        if(Math.abs(this.speed) < amount){ //we would continuosly bounce between negative and positive speed
             this.speed = 0;
             updateSpedGraphics(this.speed);
-            this.updateInternal();
             return;
         }
         if(this.speed > 0){
@@ -99,8 +113,14 @@ class Player{
         }
     }
 
-    turn(amt){
+    turn(mul){
+        // rotAngle : rotAngleMax = maxSpeed-speed : maxSpeed
+        // rotAngle = rotAngleMax * (maxSpeed - speed) / maxSpeed
+        var amt = PLAYER_MAX_ROT_ANGLE * (PLAYER_MAX_SPEED - Math.abs(this.speed)) / PLAYER_MAX_SPEED;
+        if(amt < PLAYER_MIN_ROT_ANGLE){amt = PLAYER_MIN_ROT_ANGLE}
+        amt*=mul
         player.a+=amt;
+        this.updateInternal();
     }
 }
 
