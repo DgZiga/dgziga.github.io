@@ -1,0 +1,65 @@
+
+#ui {
+    padding: 10px;
+    height: 20vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #616161;
+    color:white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    grid-area: ui;
+  }
+  input#ui_load_file-upload {
+    display: none;
+  }
+  
+  #ui_load_wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  #ui_load_options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #ui_load_drop_container {
+    padding: 4rem;
+    justify-content: center;
+    align-items: center;
+    background: #3d4141;
+    border-radius: 1rem;
+  }
+  #ui_load_file_tile_size {
+    background: #3d4141;
+    border: 0;
+    width: 2em;
+    color:#bababa;
+    margin-bottom: 10px;
+  }
+  #ui_load_file_map_width {
+    background: #3d4141;
+    border: 0;
+    width: 2em;
+    color:#bababa;
+  }
+  /* Works for Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Works for Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
