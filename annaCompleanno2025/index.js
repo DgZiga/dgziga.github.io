@@ -1,3 +1,5 @@
+document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
+
 const words =[
     "GREATEST",
     "DICEY",
@@ -43,7 +45,7 @@ for(var i=0; i<words.length; i++){
     var chars = word.split("");
     for(var j=0; j<chars.length; j++){
         var char = chars[j]
-        html+='<div class="letter" style="grid-area: a'+y+'-'+x+';"> <input type="text" maxlength="1" onInput="this.offsetParent.nextSibling.children[0].focus()"> '+
+        html+='<div class="letter" style="grid-area: a'+y+'-'+x+';" onclick="this.children[0].value=\'\'"> <input type="text" maxlength="1" onInput="focusNext(this)"> '+
         (j==0 ? 
             '<div class="numberInGrid">'+(i*1+1)+'</div>'
             : ''
@@ -65,4 +67,9 @@ function openDefinizioni(){
         }, 500)
     }
     definizioniOpen = !definizioniOpen;
+}
+function focusNext(node){
+    if(node.value.length == 1){
+        node.offsetParent.nextSibling.children[0].focus();
+    }
 }
